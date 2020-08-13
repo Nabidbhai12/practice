@@ -1,0 +1,24 @@
+#include<stdio.h>
+long long int f1(char *str)
+{
+    long long int m=1e9+9;
+    long long int p=31,power=1,hash=0;
+    for(int a=0;a<strlen(str);a++)
+    {
+        hash=(hash+(str[a]-'a'+1)*power)%m;
+        power=(power*p)%m;
+    }
+    return hash;
+
+}
+int main()
+{
+    char str[100],str1[100];
+    scanf(" %[^\n]",str);
+    scanf(" %[^\n]",str1);
+    long long int a=f1(str);
+    long long int b=f1(str);
+    printf("%lld %lld\n",a,b);
+    if(a-b==0)
+        printf("yessss\n");
+}
