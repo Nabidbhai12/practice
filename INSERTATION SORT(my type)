@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<stdlib.h>
+void swap(int *a,int *b)
+{
+    int temp=*a;
+    *a=*b;
+    *b=temp;
+}
+int main()
+{
+    int n,t;
+    scanf("%d",&n);
+    int *arr=(int*)malloc(sizeof(int)*n);
+
+
+    scanf("%d",(arr+0));
+    for(int a=1;a<n;a++){
+        scanf("%d",(arr+a));
+
+        t=a;
+        while(t>0)
+        {
+            if(arr[t-1]>arr[t])
+            {
+                swap(&arr[t-1],&arr[t]);
+                t--;
+            }
+            else
+            {
+                break;
+            }
+
+        }
+    }
+
+
+
+
+
+    for(int a=0;a<n;a++)
+        printf("%d\n",arr[a]);
+}
