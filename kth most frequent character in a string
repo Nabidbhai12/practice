@@ -1,0 +1,83 @@
+#include<stdio.h>
+#include<string.h>
+struct nabid
+{
+    int app;
+    int ch;
+};
+void f1(char *stri,int k)
+{
+    char *str=stri;
+    struct nabid arr[26];
+    for(int i=0;i<26;i++)
+        arr[i].app=0;
+    while(*str)
+    {
+        if(*str>='a' && *str<='z')
+        {
+            arr[*str-'a'].app=arr[*str-'a'].app+1;
+            arr[*str-'a'].ch=*str;
+            printf("%c %c\n",*str,arr[*str-'a'].ch);
+            str++;
+        }
+        else if(*str>='A' && *str<='Z')
+        {
+            arr[*str-'A'].app=arr[*str-'A'].app+1;
+            arr[*str-'A'].ch=*str;
+            str++;
+
+        }
+        else
+        {
+            str++;
+            continue;
+
+        }
+
+    }
+        for(int i=0;i<25;i++){
+                if(arr[i].app!=0)
+        printf("%d %c\n",arr[i].app,arr[i].ch);
+        }
+    for(int i=0;i<25;i++)
+    {
+        for(int j=i+1;j<25;j++)
+        {
+
+            if(arr[i].app>arr[j].app)
+            {
+                struct nabid temp;
+                 temp.app=arr[j].app;
+                 temp.ch=arr[j].ch;
+                 arr[j].app=arr[i].app;
+                 arr[j].ch
+                 =arr[i].ch;
+                 arr[i].app=temp.app;
+                 arr[i].ch=temp.ch;
+            }
+        }
+    }
+    int count=0;
+    printf("\n");
+    for(int i=0;i<25;i++){
+                if(arr[i].app!=0){
+        printf("no %d :%d %c\n",i,arr[i].app,arr[i].ch);
+        count++;
+                }
+                if(count==k)
+                {
+                    printf("appears %d times %c\n",arr[i].app,arr[i].ch);
+                }
+        }
+
+
+}
+int main()
+{
+    char str[1000];
+    int k;
+    scanf(" %[^\n]",str);
+    scanf("%d",&k);
+    f1(str,k);
+
+}
