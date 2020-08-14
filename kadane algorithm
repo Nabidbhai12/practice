@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<stdlib.h>
+int f1(int arr[],int size)
+{
+   int maxstill=0, maxsofar=0;
+    for(int a=0;a<size;a++)
+    {
+        maxstill+=arr[a];
+        if(maxsofar<maxstill)
+            maxsofar=maxstill;
+        if(maxstill<0)
+            maxstill=0;
+
+
+    }
+    return maxsofar;
+}
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--){
+    int n;
+    scanf("%d",&n);
+    int *arr=(int*)malloc(sizeof(int)*n);
+    for(int a=0;a<n;a++)
+        scanf("%d",arr+a);
+    printf("%d\n",f1(arr,n));
+}
+}
