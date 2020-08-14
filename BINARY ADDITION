@@ -1,0 +1,30 @@
+#include<stdio.h>
+int add(int num1,int num2)
+{
+    int p=1,temp,carry=0,num3=0;
+    while(num1 | num2)
+    {
+         temp=(num1%10)+(num2%10); printf("temp = %d\n",temp);
+        num1/=10;
+        num2/=10;
+        temp=temp+carry;printf("temp %d\n",temp);
+        carry=temp>>1;
+        temp=temp & 1; printf("temp final %d\n",temp);
+        num3=num3+(temp*p); printf("num3 = %d\n",num3);
+         printf("carry %d temp>>1 %d \n",carry,temp>>1);
+        p=p*10; printf("p = %d\n",p);
+    }
+   if(carry!=0)
+   {
+       temp=carry*p;
+       num3+=temp;
+   }
+         printf("%d\n",num3);
+
+}
+int main()
+{
+    int n1,n2;
+    while(scanf("%d %d",&n1,&n2)==2)
+        add(n1,n2);
+}
