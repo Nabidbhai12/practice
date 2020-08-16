@@ -1,0 +1,77 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+void rever(char *str)
+{
+    int len=strlen(str);
+    int count=0,frist=0,last=len-1;
+    while(count<(len/2))
+    {
+        char temp=str[frist];
+        str[frist]=str[last];
+        str[last]=temp;
+        last--;
+        frist++;
+        count++;
+
+    }
+    str[len]='\0';
+}
+int f1(char *str1,char *str2)
+{
+    rever(str1);
+    rever(str2);
+    int len=(strlen(str1)>=strlen(str2))?strlen(str1):strlen(str2);
+    len=len+2;
+    char *str3=(char*)malloc(sizeof(char)*(len));
+    char *ptr1=str1,*ptr2=str2,*ptr3=str3;
+    int carry=0;
+    printf(" len =%d\n %s\n %s\n",len,str1,str2);
+    int res=0;
+    while(*ptr1 || *ptr2)
+    {
+        int a,b;
+        if(*ptr1=='\0')
+        {a=0;
+        b=*ptr2-48;
+        printf("%d %d\n",a,b);
+        }
+        else if(*ptr2=='\0')
+            {
+                a=*ptr1-48;
+                b=0;
+                 printf("%d %d\n",a,b);
+            }
+        else
+        {
+            a=*ptr1-48;
+            b=*ptr2-48;
+             printf("%d %d\n",a,b);
+        }
+        res=carry+a+b;
+        carry=res/10;
+        res=res%10;
+        *ptr3=res+48;
+        if(*ptr1!='\0')
+        ptr1++;
+        if(*ptr2!='\0')
+        ptr2++;
+
+        ptr3++;
+
+    }
+    if(carry!=0)
+        *ptr3=48+carry;
+    ptr3++;
+    *ptr3='\0';
+    printf("%s\n",str3);
+    rever(str3);
+printf("%s\n",str3);
+}
+int main()
+{
+    char str[100],str2[100];
+    scanf(" %[^\n]",str);
+    scanf(" %[^\n]",str2);
+    f1(str,str2);
+}
