@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+void f2(unsigned long long int *arr,unsigned long long int size)
+{
+    unsigned long long int i,j;
+    for(unsigned long long int a=0;a<=size;a++)
+        arr[a]=1;
+    for(i=2;i*i<=size;i++)
+    {
+        for(j=2;j<=size;j++)
+        {
+            if(i*j>size)
+                break;
+            else
+                arr[i*j]=-1;
+        }
+    }
+    arr[0]=-1;
+    arr[1]=-1;
+}
+void f1(unsigned long long int a,unsigned long long int b)
+{
+    unsigned long long int *marr,root,t,*arr,base,r;
+    root=sqrt(b);
+
+    marr=(unsigned long long int*)malloc(sizeof(unsigned long long int)*(root+1));
+    f2(marr,root);
+/*
+    for(int aa=0;aa<=root;aa++)
+    {
+        if(marr[aa]!=-1)
+            printf("%lld\n",aa);
+    }
+    printf("\n");
+*/
+    arr=(unsigned long long int*)malloc(sizeof(unsigned long long int)*(b-a+1));
+    for(t=0;t<(b-a+1);t++)
+        arr[t]=0;
+    for(t=2;t<=root;t++)
+    {
+        if(marr[t]!=-1)
+        {
+            base=t*t;
+            if(base<a)
+            base=((a+t-1)/t)*t;
+            for(r=base;r<=b;r=r+t)
+            {
+                arr[r-a]=-1;
+            }
+        }
+    }
+
+    for(t=0;t<(b-a+1);t++)
+    {
+        if(arr[t]!=-1){
+                if((t+a)!=1 && (t+a)!=0)
+            printf("%lld\n",t+a);
+        }
+    }
+}
+int main()
+{
+    int T;
+    scanf("%d",&T);
+    while(T--){
+    unsigned long long int a,b;
+    scanf("%lld %lld",&a,&b);
+    f1(a,b);
+    }
+
+}
