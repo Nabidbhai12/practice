@@ -1,0 +1,17 @@
+#include<stdio.h>
+int f1(int n,int p)
+{
+    int x=0;
+    while(n)
+    {
+        n=n/p;
+        x=n+x;
+    }
+    return x;
+}
+int main()
+{
+    int n,p;
+    scanf("%d %d",&n,&p);
+    printf("%d",f1(n,p));
+}
