@@ -1,0 +1,174 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+void stringcpy(char *target,char *main)
+{
+    char *p=target,*q=main;
+    while(*q)
+    {
+        *target=*q;
+        q++;
+        target++;
+    }
+    *target='\0';
+}
+void xx(char *str,int i)
+{
+    char *ptr=str;
+    while(*ptr)
+        ptr++;
+    while(i)
+    {
+        *ptr=48;
+        ptr++;
+        i--;
+
+    }
+    *ptr='\0';
+
+    printf("%s\n",str);
+}
+void revere(char *str)
+{
+    int len=strlen(str);
+    int f=0,last=len-1;
+    int count=0;
+    while(count<(len/2))
+    {
+        char temp=str[f];
+        str[f]=str[last];
+        str[last]=temp;
+        f++;
+        last--;
+        count++;
+    }
+}
+void add(char *str,char *str2)
+{
+    revere(str);
+    revere(str2);
+    printf("%s\n %s\n",str,str2);
+    char *str3=(char*)malloc((strlen(str)+strlen(str2))*sizeof(int));
+    int res=0,carry=0;
+    char *ptr=str,*ptr2=str2,*ptr3=str3;
+    while(*ptr || *ptr2)
+    {
+        int a,b;
+        if(*ptr=='\0')
+        {
+            a=0;
+            b=*ptr2-48;
+            printf("a= %d b=%d\n",a,b);
+        }
+        else if(*ptr2=='\0')
+        {
+            a=*ptr-48;
+            b=0;
+ printf("a=%d b=%d\n",a,b);
+        }
+        else
+        {
+            a=*ptr-48;
+            b=*ptr2-48;
+ printf("%d %d\n",a,b);
+        }
+        res=a+b+carry;
+        carry=res/10;
+        res=res%10;
+        *ptr3=48+res;
+        if(*ptr!='\0')
+        ptr++;
+        if(*ptr2!='\0')
+            ptr2++;
+
+        ptr3++;
+
+    }
+    printf("%s\n",str3);
+    if(carry!=0){
+        *ptr3=carry+48;
+
+    ptr3++;
+    }
+    *ptr3='\0';
+
+    printf("%s\n",str3);
+    revere(str3);
+    printf("%s\n",str3);
+     strcpy(str,str3);
+    printf("%s\n",str);
+    revere(str2);
+
+}
+void mul(char *main,int num,char *target)
+{
+    printf("%d\n",num);
+    printf("main %s\n",main);
+    revere(main); printf("main reversed= %s\n",main);
+    char *ptr=main,*ptr2=target;
+    printf("%s\n",ptr);
+    int carry=0;
+    while(*ptr)
+    {
+        printf("chara = %c\n",*ptr);
+        int n=((*ptr-48)*num)+carry;printf(" n= %d\n",n);
+        carry=n/10;
+        n=n%10;printf("n = %d carry %d\n",n,carry);
+        *ptr2=n+48; printf("%c\n",*ptr2);
+        ptr++;
+        ptr2++;
+
+    }
+    if(carry!=0){
+        *ptr2=carry+48;
+    ptr2++;
+    }
+    *ptr2='\0';
+    printf("%s\n",target);
+    revere(target);
+    printf("%s\n",target);
+
+revere(main);
+}
+int f1(char *str1,char *str2)
+{
+    int len1=strlen(str1);
+    int len2=strlen(str2);
+    revere(str2);
+    char *result=(char*)malloc(sizeof(char)*(len1+len2));
+        int i=0;
+        while(*str2)
+        {
+                    char *temp=(char*)malloc(sizeof(char)*(len1+len2));
+                    int num=*str2-48;
+
+                   mul(str1,num,temp);
+                   printf("temp is %s\n",temp);
+                   if(i>0)
+                    xx(temp,i);
+                   if(i==0){
+                    stringcpy(result,temp);
+                    printf("%s\n",result);
+                   }
+                   else
+                    add(result,temp);
+
+                    printf("result is %s\n",result);
+str2++;
+i++;
+        }
+        printf("final is %s\n",result);
+
+}
+int main()
+{
+    int n;
+    char str[100],str2[100];
+    scanf(" %[^\n]",str);
+    scanf(" %[^\n]",str2);
+    f1(str,str2);
+    //scanf("%d",&n);
+    //mul(str,n,str2);
+    //revere(str);
+    //printf("%s\n",str);
+}
