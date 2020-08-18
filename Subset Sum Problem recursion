@@ -1,0 +1,25 @@
+#include<stdio.h>
+int f1(int *arr,int size,int target)
+{
+
+    if(target==0)
+        return 1;
+          if(target<0 || size<=0)
+    return 0;
+        else
+    {
+        return (f1(arr,size-1,target-arr[size-1])+(f1(arr,size-1,target)));
+    }
+
+}
+int main()
+{
+    int n,s;
+    scanf("%d",&n);
+    int *arr=(int*)malloc(sizeof(int)*n);
+    for(int a=0;a<n;a++)
+        scanf("%d",(arr+a));
+        int tar;
+        scanf("%d",&tar);
+    printf("%d\n",f1(arr,n,tar));
+}
