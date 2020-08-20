@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<stdlib.h>
+int f1(int arr[],int size)
+{
+    int high=0;
+    for(int a=0;a<size;a++)
+    {
+        if(arr[a]>high)
+            high=arr[a];
+    }
+    int *div=(int*)calloc(high+1,sizeof(int));
+    for(int a=0;a<size;a++)
+    {
+        for(int i=1;i*i<=arr[a];i++)
+        {
+            if(arr[a]%i==0)
+                div[i]+=1;
+            if(((arr[a]/i)!=i))
+                div[arr[a]/i]++;
+
+        }
+    }
+    for(int i=high;i>=1;i--)
+    {
+        if(div[i]>1)
+            return i;
+    }
+}
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    int *arr=(int*)malloc(sizeof(int)*n);
+    for(int a=0;a<n;a++)
+        scanf("%d",(arr+a));
+        printf("%d",f1(arr,n));
+}
