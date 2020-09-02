@@ -1,0 +1,46 @@
+#include<stdlib.h>
+#include<stdio.h>
+int f1(int **mat,int size)
+{
+    for(int a=0;a<(size*size);a++)
+    {
+        for(int b=a+1;b<(size*size);b++)
+        {
+            if(mat[a/size][a%size]>mat[b/size][b%size])
+            {
+            int temp=mat[b/size][b%size];
+            mat[b/size][b%size]=mat[a/size][a%size];
+            mat[a/size][a%size]=temp;
+            }
+        }
+    }
+
+
+}
+int main()
+{
+    int **mat;
+    int n;
+    scanf("%d",&n);
+    mat=(int**)malloc(sizeof(int*)*n);
+    for(int a=0;a<n;a++)
+        mat[a]=(int*)malloc(sizeof(int)*n);
+        for(int a=0;a<n;a++)
+        {
+            for(int b=0;b<n;b++)
+             scanf("%d" ,&mat[a][b]);
+             printf("\n");
+        }
+            f1(mat,n);
+
+                for(int a=0;a<n;a++)
+        {
+            for(int b=0;b<n;b++)
+             printf("%d ",*(*(mat+a)+b));
+             printf("\n");
+        }
+}
+ /*  00 01 02 03 04
+   10 11 12 13 14
+   21 22 22 23 24
+   30 31 32 33 34
