@@ -1,0 +1,78 @@
+#include<stdio.h>
+int reverse(char *str)
+{
+    int count=0;
+    char *frist,*last;
+    last=str;
+    while(*last!='\0')
+    {
+        last++;
+        count++;
+    }
+    last--;
+    frist=str;
+    int t=0;
+    while(t<(count/2))
+    {
+        char temp=*frist;
+        *frist=*last;
+        *last=temp;
+        t++;
+        frist++;
+        last--;
+    }
+
+
+
+}
+int add(char *str1,char *str2)
+{
+    reverse(str1);
+    reverse(str2);
+    int len1=strlen(str1);
+    int len2=strlen(str2);
+    int len3=(len1>=len2)?len1:len2;
+    char *str3=(char*)malloc(sizeof(char)*len3);
+    char *ptr1=str1;
+    char *ptr2=str2;
+    char *ptr3=str3;
+    int t1,sum,t2,t3=0,carry=0;
+    while(*ptr1 || *ptr2)
+    {
+        sum=0;
+        if(*ptr1!='\0'){
+         t1=(*ptr1-48);
+         ptr1++;
+        }
+         else
+            t1=0;
+        if(*ptr2!='\0'){
+        t2=(*ptr2-48);
+        ptr2++;
+        }
+        else
+            t2=0;
+
+          sum=t1+t2+carry;
+          carry=sum>>1;
+          sum=sum & 1;
+         *ptr3=sum+48;
+        ptr3++;
+    }
+    if(carry){
+        *ptr3=carry+48;
+        ptr3++;
+    }
+    *ptr3='\0';
+    reverse(str3);
+    printf("%s\n",str3);
+
+}
+int main()
+{
+    char str1[100000],str2[100000];
+    scanf(" %[^\n]",str1);
+    scanf(" %[^\n]",str2);
+    add(str1,str2);
+    //printf("%s\n",str1);
+}
