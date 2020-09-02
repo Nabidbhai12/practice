@@ -1,0 +1,27 @@
+#include<stdlib.h>
+#include<stdio.h>
+int f1(char *str,char *temp,int size1,int size2)
+{
+    if(size1==0)
+    {
+        temp[size2]='\0';
+        printf("%s \n",temp);
+        return;
+    }
+    else
+        {
+            f1(str,temp,size1-1,size2);
+            temp[size2]=str[size1-1];
+            f1(str,temp,size1-1,size2+1);
+
+        }
+
+
+
+}
+int main()
+{
+    char str[100],temp[100];
+    scanf(" %[^\n]",str);
+    f1(str,temp,strlen(str),0);
+}
