@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<string.h>
+int f1(char *str)
+{
+    int num=0,sum=0;
+    char *ptr=str;
+    while(*ptr>=48 && *ptr<=('9'))
+        {
+            num=num*10;
+            num+=(*ptr-48);
+            ptr++;
+        }
+        sum+=num;
+        char ch;
+    while(*ptr)
+    {
+ch=*ptr;
+ptr++;
+num=0;
+        while((*ptr>=48 && *ptr<=('9')) && (*ptr!='\0'))
+        {
+            num=num*10;
+            num+=*ptr-48;
+            ptr++;
+        }
+    if(ch=='+')
+        sum+=num;
+    else
+        sum-=num;
+    }
+    printf("%d\n",sum);
+}
+int main()
+{
+    char str[1000];
+    scanf("%s",str);
+    f1(str);
+}
+
