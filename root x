@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<string.h>
+double f2(double a,double b)
+{
+    if(a>b)
+        return a-b;
+    else
+       return  b-a;
+}
+double bin(double num,double low,double high)
+{
+    if(low<=high)
+    {
+        double mid=(low+high)/2;
+        printf("%lf\n",mid);
+
+        if(f2((mid*mid),num)<0.0001)
+            return mid;
+        else if((mid*mid)>num)
+        bin(num,low,mid);
+            else
+            bin(num,mid,high);
+
+
+
+    }
+}
+int f1(double num)
+{
+    for(double a=1;a<=num;a++)
+    {
+        if((a*a)==num)
+        {
+
+         printf("%lf\n",a);
+         return ;
+        }
+         if((a*a)<num && (a+1)*(a+1)>num)
+         {
+             double p=bin(num,a,a+1);
+             printf("%lf\n",p);
+         }
+    }
+}
+int main()
+{
+    double x;
+    scanf("%lf",&x);
+f1(x);
+}
