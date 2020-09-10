@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<string.h>
+double power(double num,int x)
+{
+    if(x==1)
+        return num;
+    else
+    {
+        double t=1;
+        if(x & 1)
+            t=num;
+        return power(num,x/2)*power(num,x/2)*t;
+    }
+}
+double f2(double a,double b)
+{
+    if(a>b)
+        return a-b;
+    else
+       return  b-a;
+}
+double bin(double num,double low,double high,int n)
+{
+    if(low<=high)
+    {
+        double mid=(low+high)/2;
+        printf("low =  %lf high = %lf mid = %lf\n",low,high,mid);
+
+        if(f2(power(mid,n),num)<0.00001)
+            return mid;
+
+        else if(power(mid,n)>num)
+        return bin(num,low,mid,n);
+            else
+            return bin(num,mid,high,n);
+
+
+
+    }
+}
+int f1(double num,int n)
+{
+    for(double a=1;a<=num;a++)
+    {
+        if(power(a,n)==num)
+        {
+
+         printf("full %lf\n",a);
+         return ;
+        }
+         if(power(a,n)<num && (power(a+1,n))>num)
+         {
+             printf("%lf = low  %lf=high",power(a,n),power(a+1,n));
+             double p=bin(num,a,a+1,n);
+             printf("%lf\n",p);
+         }
+    }
+}
+int main()
+{
+    int n;
+    double x;
+    scanf("%lf %d",&x,&n);
+f1(x,n);
+}
