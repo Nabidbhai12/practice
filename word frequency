@@ -1,0 +1,102 @@
+#include<stdio.h>
+#include<stdlib.h>
+int f3(char *str1,char *str2)
+{
+    while(*str1 && *str2)
+    {
+        if(*str1!=*str2)
+            return *str1-*str2;
+        str1++;
+        str2++;
+    }
+    return strlen(str1)-strlen(str2);
+}
+int f2(char **mstr,int order)
+{
+  //  printf("%s\n",mstr[0]);
+
+    printf("function\n\n");
+    //    printf("%s\n\n",mstr[0]);
+
+    int flag;
+    int count=0;
+    for(int a=0;a<=order;a++)
+    {
+        flag=1;
+      //  printf("%s\n",mstr[a]);
+        for(int b=0;b<=order;b++)
+        {
+            if(f3(mstr[a],mstr[b])==0 && a!=b)
+        {
+//printf("repeat %s\n",mstr[a]);
+
+               flag=0;
+            break;
+        }
+        }
+
+        if(flag==1){
+                printf("%d %s\n",count,mstr[a]);
+            count++;
+        }
+
+
+    }
+    printf("%d\n",count);
+
+}
+int f1(char **mstr,int order,char *str)
+{
+ //printf("Hi %d\n",order);
+ int t=0;
+    while(str[t]!='\0')
+    {
+        mstr[order][t]=str[t];
+ //       printf("%c %c\n",str[t],mstr[order][t]);
+        t++;
+    }
+    mstr[order][t]='\0';
+//printf("%s\n",mstr[order][t]);
+}
+int main()
+{
+ char **str;
+ str=(char**)malloc(sizeof(char*)*100);
+ for(int a=0;a<100;a++)
+    str[a]=(char*)malloc(sizeof(char)*100);
+ FILE *fptr;
+ fptr=fopen("nabidf.txt","r");
+ if(fptr==NULL)
+ {
+     exit(1);
+ }
+ char str1[100];
+ int ch,h,count=0;
+ while(1)
+ {
+     h=0;
+     while(1)
+     {
+         ch=fgetc(fptr);
+         if(ch==32 || ch==EOF)
+            break;
+         str1[h++]=ch;
+
+     }
+     str1[h]='\0';
+     printf("%s\n",str1);
+
+     f1(str,count,str1);
+     printf("%s\n",str[count]);
+     if(ch==EOF)
+        break;
+        count++;
+
+ }
+ f2(str,count);
+// for(int a=0;a<=count;a++)
+  //  printf("%s \n",str[a]);
+
+
+}
+
