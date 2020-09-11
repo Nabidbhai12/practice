@@ -1,0 +1,56 @@
+#include<stdio.h>
+#define pi acos(0)*2
+int main()
+{
+   FILE *fp;
+   fp=fopen("1.txt","r+");
+   char str[10000];
+   int t=0;
+   int ch=0;
+   while(ftell(fp)<=100)
+   {
+       ch=fgetc(fp);
+       if(ch==EOF)
+        break;
+       str[t++]=ch;
+
+   }
+   rewind(fp);
+   printf("%s\n",str);
+   fseek(fp,0,SEEK_END);
+int len=ftell(fp);
+   rewind(fp);
+   fseek(fp,len-100,SEEK_SET);
+   char str2[100];
+   int y=0;
+   t=0;
+   while(ftell(fp)<=len)
+   {
+       ch=fgetc(fp);
+       if(ch==EOF)
+        break;
+       str2[t++]=ch;
+   }
+   printf("%s\n",str2);
+   rewind(fp);
+   ch=0;
+   t=0;
+   while(ftell(fp)<=100)
+   {
+       ch=str2[t];
+       fputc(ch,fp);
+       t++;
+   }
+   ch=0;
+   t=0;
+   rewind(fp);
+   fseek(fp,len-100,SEEK_CUR);
+   while(ftell(fp)<=len)
+   {
+       ch=str[t];
+       t++;
+       fputc(ch,fp);
+   }
+   fclose(fp);
+
+}
