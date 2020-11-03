@@ -1,0 +1,32 @@
+#include<stdio.h>
+int f1(int n,char from,char to,char aux)
+{
+    if(n==1)
+    {
+        printf("%c to %c\n",from,to);
+        return;
+    }
+    else
+    {
+        if(n==2){
+            printf("disc %d moved from ",n-1);
+        }
+                f1(n-1,from,aux,to);
+
+                            printf("disc %d moved from ",n);
+        f1(1,from,to,aux);
+        if(n==2){
+                                    printf("disc %d moved from ",n-1);
+
+        }
+                f1(n-1,aux,to,from);
+
+    }
+
+}
+
+int main()
+{
+    char from='A',to='C',aux='B';
+    f1(4,from,to,aux);
+}
